@@ -1,0 +1,14 @@
+{
+	"name":"fr.theoverwaerde.build-manager",
+	"version":"1.0.0",
+	"description": "Build Manager is a tool for launch multiple build in a row. It's useful for build a project for multiple platform.",
+	"displayName": "Build Manager",
+	"unity": "2021.3",
+	"author":
+	{
+		"name" : "Théo Verwaerde",
+		"url" : "https://www.theoverwaerde.fr"
+	},
+	"documentationUrl": "https://github.com/theoverwaerde/unity-build-manager/wiki",
+	"keywords": ["build", "manager", "automation", "tool"],
+}

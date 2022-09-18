@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="PresetConrollers" style="flex-direction: row;">
+        <ui:Label text="Preset Count: &lt;b&gt;4&lt;/b&gt;" display-tooltip-when-elided="true" name="Count" style="margin-right: auto;" />
+        <ui:Button text="Create" display-tooltip-when-elided="true" name="Create" />
+        <ui:Button text="Remove" name="Remove" />
+    </ui:VisualElement>
+    <ui:ListView focusable="true" show-alternating-row-backgrounds="ContentOnly" show-border="true" name="Presets" fixed-item-height="21" style="flex-grow: 1;" />
+    <ui:HelpBox name="HelpBox" message-type="Error" />
+    <ui:VisualElement name="BuildInformation" style="flex-shrink: 0; flex-direction: row; justify-content: space-around;">
+        <ui:Label text="Version" display-tooltip-when-elided="true" name="Version" />
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="Location" />
+    </ui:VisualElement>
+    <ui:VisualElement name="BuildButton" style="flex-direction: row;">
+        <ui:Button text="Build " display-tooltip-when-elided="true" name="Build" style="flex-grow: 1;" />
+        <ui:Button text="Open Builds Folder" display-tooltip-when-elided="true" name="BuildFolder" />
+    </ui:VisualElement>
+    <ui:VisualElement name="SpecificBuild" style="flex-direction: row;">
+        <uie:EnumField label="Specific Platform" name="Platform" style="flex-grow: 1;" />
+        <ui:Button text="Build selected only on platform" display-tooltip-when-elided="true" name="BuildPlatform" style="flex-grow: 4;" />
+    </ui:VisualElement>
+    <ui:Label text="1/5" display-tooltip-when-elided="true" name="ProgressText" style="-unity-text-align: upper-center;" />
+    <ui:ProgressBar title=" " name="ProgressBar" high-value="1" />
+</ui:UXML>

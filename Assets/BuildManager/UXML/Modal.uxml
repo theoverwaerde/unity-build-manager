@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Modal" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5);">
+        <ui:VisualElement style="margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto; width: 212px; height: 96px; background-color: rgb(51, 51, 51);">
+            <ui:Label text="Are you sure to delete:" display-tooltip-when-elided="true" style="-unity-text-align: upper-center;" />
+            <ui:Label text="Label" display-tooltip-when-elided="true" name="Name" style="-unity-text-align: upper-center; -unity-font-style: bold;" />
+            <ui:VisualElement style="flex-direction: row; justify-content: space-around;">
+                <ui:Button text="Cancel" display-tooltip-when-elided="true" name="Cancel" />
+                <ui:Button text="Confirm" display-tooltip-when-elided="true" name="Confirm" style="opacity: 0.75;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

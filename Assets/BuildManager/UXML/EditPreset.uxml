@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Button text="&lt;= Back to Manager" display-tooltip-when-elided="true" name="Back" />
+    <ui:TextField picking-mode="Ignore" label="Preset Name" value="filler text" text="filler text" binding-path="presetName" style="height: 18px;" />
+    <uie:EnumFlagsField label="Target Platforms" value="Center" binding-path="buildTargets" />
+    <ui:ListView focusable="true" binding-path="extraScriptingDefines" show-foldout-header="true" show-add-remove-footer="true" reorderable="true" header-title="Extra Scripting Define" />
+</ui:UXML>
