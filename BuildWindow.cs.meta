@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 846249601991c4596bc4ca859b08adec
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - buildManager: {fileID: 9197481963319205126, guid: 0608846ad229ea7159d92755170cd202, type: 3}
+  - presetLine: {fileID: 9197481963319205126, guid: a3423a5d8567983d98212f43f12cbbe3, type: 3}
+  - modalRemove: {fileID: 9197481963319205126, guid: b5b3f2ff243c774cd8e297c47f7b62b5, type: 3}
+  - buildPreset: {fileID: 9197481963319205126, guid: 6beb3ef19d655701e8305fae36edb5ef, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
