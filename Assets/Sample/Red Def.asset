@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   presetName: Red Def
   isActive: 1
-  buildTargets: 17
+  buildTargets: 5
   extraScriptingDefines:
   - RED
   options: 0

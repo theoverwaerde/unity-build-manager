@@ -98,9 +98,7 @@ namespace BuildManager
 			{
 				case BuildTarget.Linux:
 					return IconLinux;
-				case BuildTarget.MacIntel:
-				case BuildTarget.MacSilicon:
-				case BuildTarget.MacBoth:
+				case BuildTarget.Mac:
 					return IconStandalone;
 				case BuildTarget.Android:
 					return IconAndroid;

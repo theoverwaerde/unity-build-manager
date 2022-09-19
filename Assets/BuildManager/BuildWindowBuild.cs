@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
@@ -191,8 +190,26 @@ namespace BuildManager
 			{
 				File.Delete(zipPath);
 			}
-			
-			await Task.Run(() => ZipFile.CreateFromDirectory(outputPath, zipPath));
+			// Zip file & folder but not include _DoNotShip folder and zip in folder if BuildManagerSettings.instance.zipContainsFolder is true
+			using(ZipArchive archive = ZipFile.Open(zipPath, ZipArchiveMode.Create))
+			{
+				foreach (string file in Directory.GetFiles(outputPath,"*",SearchOption.AllDirectories))
+				{
+					if (file.Contains("_DoNotShip"))
+					{
+						continue;
+					}
+					
+					string relativePath = file.Replace(outputPath, "");
+					if (BuildManagerSettings.instance.zipContainsFolder)
+					{
+						relativePath = relativePath[1..];
+					}
+					archive.CreateEntryFromFile(file, relativePath);
+				}
+			}
+
+			//await Task.Run(() => ZipFile.CreateFromDirectory(outputPath, zipPath));
 		}
 
 		private static BuildReport MakeBuild(BuildPreset preset, BuildTarget target)
@@ -308,11 +325,7 @@ namespace BuildManager
 			{
 				BuildTarget.Windows => BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.Standalone,
 					UnityEditor.BuildTarget.StandaloneWindows64),
-				BuildTarget.MacIntel => BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.Standalone,
-					UnityEditor.BuildTarget.StandaloneOSX),
-				BuildTarget.MacSilicon => BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.Standalone,
-					UnityEditor.BuildTarget.StandaloneOSX),
-				BuildTarget.MacBoth => BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.Standalone,
+				BuildTarget.Mac => BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.Standalone,
 					UnityEditor.BuildTarget.StandaloneOSX),
 				BuildTarget.Linux => BuildPipeline.IsBuildTargetSupported(BuildTargetGroup.Standalone,
 					UnityEditor.BuildTarget.StandaloneLinux64),
@@ -335,9 +348,7 @@ namespace BuildManager
 			return buildTarget switch
 			{
 				BuildTarget.Windows => UnityEditor.BuildTarget.StandaloneWindows64,
-				BuildTarget.MacIntel => UnityEditor.BuildTarget.StandaloneOSX,
-				BuildTarget.MacSilicon => UnityEditor.BuildTarget.StandaloneOSX,
-				BuildTarget.MacBoth => UnityEditor.BuildTarget.StandaloneOSX,
+				BuildTarget.Mac => UnityEditor.BuildTarget.StandaloneOSX,
 				BuildTarget.Linux => UnityEditor.BuildTarget.StandaloneLinux64,
 				BuildTarget.Android => UnityEditor.BuildTarget.Android,
 				BuildTarget.IOS => UnityEditor.BuildTarget.iOS,

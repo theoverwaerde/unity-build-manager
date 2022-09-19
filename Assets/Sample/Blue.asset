@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   presetName: Blue
   isActive: 1
-  buildTargets: 17
+  buildTargets: 5
   extraScriptingDefines:
   - BLUE
   options: 0

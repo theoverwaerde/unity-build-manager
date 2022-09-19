@@ -17,6 +17,7 @@
     <ui:VisualElement name="SpecificBuild" style="flex-direction: row;">
         <uie:EnumField label="Specific Platform" name="Platform" style="flex-grow: 1;" />
         <ui:Button text="Build selected only on platform" display-tooltip-when-elided="true" name="BuildPlatform" style="flex-grow: 4;" />
+        <ui:Button text="Force" display-tooltip-when-elided="true" name="ForceBuild" />
     </ui:VisualElement>
     <ui:Label text="1/5" display-tooltip-when-elided="true" name="ProgressText" style="-unity-text-align: upper-center;" />
     <ui:ProgressBar title=" " name="ProgressBar" high-value="1" />

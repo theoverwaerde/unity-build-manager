@@ -22,15 +22,7 @@ namespace BuildManager
         public BuildPreset SetStandalone()
         {
             presetName = "Standalone";
-            buildTargets = BuildTarget.Windows | BuildTarget.MacBoth | BuildTarget.Linux;
-            return this;
-        }
-
-        [ContextMenu("Reset to Standalone Diff Mac")]
-        public BuildPreset SetStandaloneDiffMac()
-        {
-            presetName = "Standalone Different Mac";
-            buildTargets = BuildTarget.Windows | BuildTarget.MacIntel | BuildTarget.MacSilicon | BuildTarget.Linux;
+            buildTargets = BuildTarget.Windows | BuildTarget.Mac | BuildTarget.Linux;
             return this;
         }
         

@@ -15,7 +15,9 @@ MonoBehaviour:
   buildPath: Builds/{preset}/{platform}/{product}
   zipBuilds: 1
   zipPath: Builds/{preset}/{product}_{platform}_{version}.zip
+  zipCompressionLevel: 0
+  zipContainsFolder: 1
   incrementBuildVersionByBuild: 1
   incrementVersion: 1
+  splitMacOSBuilds: 0
   stopBuildOnErrors: 1
-  confirmOverwrite: 0
