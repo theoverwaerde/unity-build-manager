@@ -29,6 +29,7 @@ namespace BuildManager
         private Button _openBuildFolder;
         private EnumField _specificBuildTarget;
         private Button _specificBuild;
+        private Button _forceSpecificBuild;
         private Label _progress;
         private ProgressBar _progressBar;
 
@@ -37,7 +38,7 @@ namespace BuildManager
         private VisualElement _editMenu;
             
         
-        [MenuItem("File/Build Manager", priority = 200)]
+        [MenuItem("File/Build Manager... %&B", priority = 206)]
         public static void ShowWindow()
         {
             BuildWindow window = GetWindow<BuildWindow>();
@@ -70,13 +71,14 @@ namespace BuildManager
             _openBuildFolder = _mainMenu.Q<Button>("BuildFolder");
             _specificBuildTarget = _mainMenu.Q<EnumField>("Platform");
             _specificBuild = _mainMenu.Q<Button>("BuildPlatform");
+            _forceSpecificBuild = _mainMenu.Q<Button>("ForceBuild");
             _progress = _mainMenu.Q<Label>("ProgressText");
             _progressBar = _mainMenu.Q<ProgressBar>("ProgressBar");
             
             #if UNITY_EDITOR_WIN
             _specificBuildTarget.Init(BuildTarget.Windows);
             #elif UNITY_EDITOR_OSX
-            _specificBuildTarget.Init(BuildTarget.MacBoth);
+            _specificBuildTarget.Init(BuildTarget.Mac);
             #elif UNITY_EDITOR_LINUX
             _specificBuildTarget.Init(BuildTarget.Linux);
             #endif
@@ -89,6 +91,7 @@ namespace BuildManager
             _build.clicked += Build;
             _openBuildFolder.clicked += OpenBuildFolder;
             _specificBuild.clicked += BuildSpecific;
+            _forceSpecificBuild.clicked += BuildSpecific;
             
             _buildPresets.itemsSource = _presets;
             _buildPresets.makeItem = MakeItem;
@@ -211,10 +214,17 @@ namespace BuildManager
 
             BuildTarget specificBuild = (BuildTarget)_specificBuildTarget.value;
             
-            bool specificBuildSupport = hasSelection && VerifyBuildModule(specificBuild & ((BuildPreset)_buildPresets.selectedItem).buildTargets);
+            bool specificBuildSupport = hasSelection && VerifyBuildModule(specificBuild);
+            bool specificBuildSupportAvailable = specificBuildSupport && (specificBuild & ((BuildPreset)_buildPresets.selectedItem).buildTargets) != 0;
+
+            const string noModule = "This build target is not installed.";
+            const string noInPreset = "This build target is not supported by the preset.";
             
-            _specificBuild.SetEnabled(specificBuildSupport);
-            _specificBuild.tooltip = specificBuildSupport ? "" : "This build target is not supported by the current Unity version.";
+            _specificBuild.SetEnabled(specificBuildSupportAvailable);
+            _forceSpecificBuild.SetEnabled(specificBuildSupport);
+            
+            _forceSpecificBuild.tooltip = specificBuildSupport ? "" : noModule;
+            _specificBuild.tooltip = specificBuildSupportAvailable ? "" : specificBuildSupport ? noInPreset : noModule;
             
             BuildTarget globalBuildTargets = 0;
 

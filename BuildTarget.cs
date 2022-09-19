@@ -6,16 +6,14 @@ namespace BuildManager
     public enum BuildTarget
     {
         Windows = 1,
-        MacIntel = 2,
-        MacSilicon = 4,
-        MacBoth = 8,
-        Linux = 16,
-        //Standalone = Windows | MacBoth | Linux,
-        Android = 32,
-        IOS = 64,
+        Mac = 2,
+        Linux = 4,
+        //Standalone = Windows | Mac | Linux,
+        Android = 8,
+        IOS = 16,
         //Mobile = Android | IOS,
-        WebGL = 128,
-        UWP = 256,
-        AppleTV = 512,
+        WebGL = 32,
+        UWP = 64,
+        AppleTV = 128,
     }
 }
