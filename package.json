@@ -1,6 +1,6 @@
 {
 	"name":"fr.theoverwaerde.build-manager",
-	"version":"1.2.0",
+	"version":"1.2.1",
 	"description": "Build Manager is a tool for launch multiple build in a row. It's useful for build a project for multiple platform.",
 	"displayName": "Build Manager",
 	"unity": "2021.3",
@@ -11,5 +11,13 @@
 		"email": "contact@theoverwaerde.fr",
 		"url" : "https://www.theoverwaerde.fr"
 	},
-	"keywords": ["build", "manager", "automation", "tool"]
+	"keywords": ["build", "manager", "automation", "tool"],
+	"samples":
+	[
+		{
+			"displayName": "Defines Example",
+			"description": "This sample show how to use defines in Build Manager.",
+			"path": "Samples~/DefinesExample"
+		}
+	]
 }
