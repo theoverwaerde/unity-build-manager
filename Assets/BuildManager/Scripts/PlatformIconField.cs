@@ -1,9 +1,8 @@
 using System;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace BuildManager
+namespace BuildManager.Scripts
 {
 	public class PlatformIcon : BindableElement, INotifyValueChanged<BuildTarget>
 	{

@@ -6,7 +6,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace BuildManager
+namespace BuildManager.Scripts
 {
     public partial class BuildWindow : EditorWindow
     {

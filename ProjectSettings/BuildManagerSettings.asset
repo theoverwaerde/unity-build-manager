@@ -21,3 +21,4 @@ MonoBehaviour:
   incrementVersion: 1
   splitMacOSBuilds: 0
   stopBuildOnErrors: 1
+  buildAddressable: 1
