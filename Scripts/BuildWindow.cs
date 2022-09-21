@@ -309,10 +309,18 @@ namespace BuildManager.Scripts
             
             _editMenu.Q<Button>("Back").clicked += BackToManage;
             
+            _editMenu.Q<TextField>("Name").RegisterValueChangedCallback(UpdateName);
+            
             void BackToManage()
             {
                 rootVisualElement.Remove(_editMenu);
                 _mainMenu.style.display = DisplayStyle.Flex;
+            }
+            
+            void UpdateName(ChangeEvent<string> evt)
+            {
+                string path = AssetDatabase.GetAssetPath(preset);
+                AssetDatabase.RenameAsset(path, evt.newValue);
             }
         }
     }
