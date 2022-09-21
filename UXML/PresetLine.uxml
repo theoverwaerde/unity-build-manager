@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:Toggle binding-path="isActive" />
     <ui:Label text="Label" display-tooltip-when-elided="true" binding-path="presetName" />
-    <BuildManager.PlatformIcon style="margin-left: auto;" />
+    <BuildManager.Scripts.PlatformIcon style="margin-left: auto;" />
     <ui:Button text="Edit" display-tooltip-when-elided="true" name="Edit" />
 </ui:UXML>

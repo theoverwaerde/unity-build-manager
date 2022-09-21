@@ -1,6 +1,6 @@
 using System;
 
-namespace BuildManager
+namespace BuildManager.Scripts
 {
     [Flags]
     public enum BuildTarget

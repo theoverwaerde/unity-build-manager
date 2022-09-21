@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using CompressionLevel = System.IO.Compression.CompressionLevel;
 
-namespace BuildManager
+
+namespace BuildManager.Scripts
 {
 	[FilePath("ProjectSettings/"+nameof(BuildManagerSettings)+".asset", FilePathAttribute.Location.ProjectFolder)]
 	public class BuildManagerSettings : ScriptableSingleton<BuildManagerSettings>
@@ -18,6 +19,9 @@ namespace BuildManager
 		public byte incrementVersion = 2;
 		public bool splitMacOSBuilds = false;
 		public bool stopBuildOnErrors = false;
+		#if USE_ADDRESSABLE
+		public bool buildAddressable = true;
+		#endif
 		//public bool confirmOverwrite = true;
 
 		internal SerializedObject GetSerializedObject()
@@ -49,6 +53,9 @@ namespace BuildManager
 		private SerializedProperty _splitMacOSBuilds;
 		private SerializedProperty _stopBuildOnErrors;
 		//private SerializedProperty _confirmOverwrite;
+		#if USE_ADDRESSABLE
+		private SerializedProperty _buildAddressable;
+		#endif
 
 	    private class Styles
 	    {
@@ -64,6 +71,9 @@ namespace BuildManager
 	        public static readonly GUIContent SplitMacOSBuildsLabel = EditorGUIUtility.TrTextContent("Split macOS Builds", "If enabled, the macOS build will be split into a Intel and a Silicon build.");
 	        public static readonly GUIContent StopBuildOnErrorsLabel = EditorGUIUtility.TrTextContent("Stop Build On Errors", "If enabled, the build will stop if there are any errors.");
 	        //public static readonly GUIContent ConfirmOverwriteLabel = EditorGUIUtility.TrTextContent("Confirm Overwrite", "If enabled, the build will ask for confirmation before overwriting an existing build.");
+	        #if USE_ADDRESSABLE
+		    public static readonly GUIContent BuildAddressableLabel = EditorGUIUtility.TrTextContent("Build Addressable", "If enabled, Addressable will be built before the build.");
+	        #endif
 	    }
 
 	    private BuildManagerSettingsProvider(string path, SettingsScope scopes, IEnumerable<string> keywords = null)
@@ -83,6 +93,9 @@ namespace BuildManager
 	        _splitMacOSBuilds = _serializedObject.FindProperty("splitMacOSBuilds");
 	        _stopBuildOnErrors = _serializedObject.FindProperty("stopBuildOnErrors");
 	        //_confirmOverwrite = _serializedObject.FindProperty("confirmOverwrite");
+	        #if USE_ADDRESSABLE
+		    _buildAddressable = _serializedObject.FindProperty("buildAddressable");
+	        #endif
 	    }
 
 	    public override void OnGUI(string searchContext)
@@ -109,6 +122,9 @@ namespace BuildManager
             _splitMacOSBuilds.boolValue = EditorGUILayout.Toggle(Styles.SplitMacOSBuildsLabel, _splitMacOSBuilds.boolValue);
             _stopBuildOnErrors.boolValue = EditorGUILayout.Toggle(Styles.StopBuildOnErrorsLabel, _stopBuildOnErrors.boolValue);
             //_confirmOverwrite.boolValue = EditorGUILayout.Toggle(Styles.ConfirmOverwriteLabel, _confirmOverwrite.boolValue);
+            #if USE_ADDRESSABLE
+		    _buildAddressable.boolValue = EditorGUILayout.Toggle(Styles.BuildAddressableLabel, _buildAddressable.boolValue);
+		    #endif
             
             if (EditorGUI.EndChangeCheck())
             {

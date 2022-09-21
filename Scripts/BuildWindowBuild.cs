@@ -7,8 +7,11 @@ using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 using UnityEngine.UIElements;
+#if USE_ADDRESSABLE
+using UnityEditor.AddressableAssets.Settings;
+#endif
 
-namespace BuildManager
+namespace BuildManager.Scripts
 {
 	public partial class BuildWindow
 	{
@@ -116,8 +119,18 @@ namespace BuildManager
 		private async Task<BuildResult> BuildAsync(params (BuildPreset, BuildTarget)[] toBuild)
 		{
 			_progressBar.value = 0;
-			_progress.text = "Building...";
+			
+			#if USE_ADDRESSABLE
+			if (BuildManagerSettings.instance.buildAddressable)
+			{
+				_progress.text = "Building Addressable...";
+				AddressableAssetSettings.CleanPlayerContent();
+				AddressableAssetSettings.BuildPlayerContent();
+			}
+			#endif
 
+			_progress.text = "Start build...";
+			
 			int failed = 0;
 
 			int i = 0;
@@ -177,7 +190,7 @@ namespace BuildManager
 			return BuildResult.Succeeded;
 		}
 
-		private static async Task ZipBuild(BuildPreset preset, BuildTarget target)
+		private static Task ZipBuild(BuildPreset preset, BuildTarget target)
 		{
 			string outputPath = CompilePath(preset, target);
 			string zipPath = CompilePath(preset, target, true);
@@ -208,6 +221,8 @@ namespace BuildManager
 					archive.CreateEntryFromFile(file, relativePath);
 				}
 			}
+
+			return Task.CompletedTask;
 
 			//await Task.Run(() => ZipFile.CreateFromDirectory(outputPath, zipPath));
 		}
