@@ -16,7 +16,7 @@ namespace BuildManager.Scripts
         [SerializeField] private VisualTreeAsset buildPreset;
         
         private readonly List<BuildPreset> _presets = new List<BuildPreset>();
-        private const string DefaultPath = "Assets/BuildManager/Preset.asset";
+        private const string DefaultPath = "Assets/Editor/BuildManager/Preset.asset";
         
         private Label _presetCount;
         private Button _addPreset;
@@ -32,12 +32,10 @@ namespace BuildManager.Scripts
         private Button _forceSpecificBuild;
         private Label _progress;
         private ProgressBar _progressBar;
-
-
+        
         private VisualElement _mainMenu;
         private VisualElement _editMenu;
-            
-        
+
         [MenuItem("File/Build Manager... %&B", priority = 206)]
         public static void ShowWindow()
         {
@@ -128,7 +126,17 @@ namespace BuildManager.Scripts
         
         private void AddPreset()
         {
-            string folderPath = DefaultPath[..DefaultPath.LastIndexOf('/')];
+            string folderPath = DefaultPath;
+            
+            if(_presets.Count > 0)
+            {
+                folderPath = AssetDatabase.GetAssetPath(_presets[0]);
+            }
+            
+            folderPath = folderPath[..folderPath.LastIndexOf('/')];
+            
+            string defaultName = DefaultPath[(DefaultPath.LastIndexOf('/') + 1)..];
+            string path = folderPath + "/" + defaultName;
             
             if (!AssetDatabase.IsValidFolder(folderPath))
             {
@@ -137,7 +145,7 @@ namespace BuildManager.Scripts
             
             BuildPreset preset = CreateInstance<BuildPreset>().SetStandalone();
             
-            AssetDatabase.CreateAsset(preset, AssetDatabase.GenerateUniqueAssetPath(DefaultPath));
+            AssetDatabase.CreateAsset(preset, AssetDatabase.GenerateUniqueAssetPath(path));
             
             _presets.Add(preset);
             
@@ -267,18 +275,7 @@ namespace BuildManager.Scripts
 
             if (assets.Length == 0)
             {
-                string folderPath = DefaultPath[..DefaultPath.LastIndexOf('/')];
-                
-                if (!AssetDatabase.IsValidFolder(folderPath))
-                {
-                    AssetDatabase.CreateFolder(folderPath[..folderPath.LastIndexOf('/')], folderPath[(folderPath.LastIndexOf('/') + 1)..]);
-                }
-                
-                BuildPreset preset = CreateInstance<BuildPreset>().SetStandalone();
-                
-                AssetDatabase.CreateAsset(preset, AssetDatabase.GenerateUniqueAssetPath(DefaultPath));
-
-                _presets.Add(preset);
+                AddPreset();
                 
                 UpdateGenericData();
                 
