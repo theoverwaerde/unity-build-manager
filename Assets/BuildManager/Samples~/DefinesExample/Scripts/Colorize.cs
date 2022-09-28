@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Colorize : MonoBehaviour
+public sealed class Colorize : MonoBehaviour
 {
     private void Start()
     {

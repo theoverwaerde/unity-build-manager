@@ -4,16 +4,16 @@ using UnityEngine.UIElements;
 
 namespace BuildManager.Scripts
 {
-	public class PlatformIcon : BindableElement, INotifyValueChanged<BuildTarget>
+	internal sealed class PlatformIcon : BindableElement, INotifyValueChanged<BuildTarget>
 	{
-		public new class UxmlTraits : BindableElement.UxmlTraits { }
-		public new class UxmlFactory : UxmlFactory<PlatformIcon, UxmlTraits> { }
-		
-		public BuildTarget m_Value;
-		
+		internal new sealed class UxmlTraits : BindableElement.UxmlTraits { }
+		internal new sealed class UxmlFactory : UxmlFactory<PlatformIcon, UxmlTraits> { }
+
+		private BuildTarget _value;
+
 		public BuildTarget value
 		{
-			get => m_Value;
+			get => _value;
 			
 			set
 			{
@@ -35,7 +35,7 @@ namespace BuildManager.Scripts
 		{
 			style.flexDirection = FlexDirection.Row;
 		}
-		
+
 
 		public void SetValueWithoutNotify(BuildTarget newValue)
 		{

@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 namespace BuildManager.Scripts
 {
-    public partial class BuildWindow : EditorWindow
+    internal sealed partial class BuildWindow : EditorWindow
     {
         [SerializeField] private VisualTreeAsset buildManager;
         [SerializeField] private VisualTreeAsset presetLine;

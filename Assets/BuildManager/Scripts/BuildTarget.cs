@@ -3,7 +3,7 @@ using System;
 namespace BuildManager.Scripts
 {
     [Flags]
-    public enum BuildTarget
+    internal enum BuildTarget
     {
         Windows = 1,
         Mac = 2,
