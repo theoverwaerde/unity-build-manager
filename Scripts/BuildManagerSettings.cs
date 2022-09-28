@@ -8,7 +8,7 @@ using CompressionLevel = System.IO.Compression.CompressionLevel;
 namespace BuildManager.Scripts
 {
 	[FilePath("ProjectSettings/"+nameof(BuildManagerSettings)+".asset", FilePathAttribute.Location.ProjectFolder)]
-	public class BuildManagerSettings : ScriptableSingleton<BuildManagerSettings>
+	internal sealed class BuildManagerSettings : ScriptableSingleton<BuildManagerSettings>
 	{
 		public string buildPath = "Builds/{preset}/{platform}/{product}";
 		public bool zipBuilds = false;
@@ -40,7 +40,7 @@ namespace BuildManager.Scripts
 		}
 	}
 
-	internal class BuildManagerSettingsProvider : SettingsProvider
+	internal sealed class BuildManagerSettingsProvider : SettingsProvider
 	{
 		private SerializedObject _serializedObject;
 		private SerializedProperty _buildPath;

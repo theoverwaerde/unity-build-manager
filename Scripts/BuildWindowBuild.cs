@@ -13,7 +13,7 @@ using UnityEditor.AddressableAssets.Settings;
 
 namespace BuildManager.Scripts
 {
-	public partial class BuildWindow
+	internal sealed partial class BuildWindow
 	{
 		private event Action EndBuild;
 		

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BuildManager.Scripts
 {
-    public class BuildPreset : ScriptableObject
+    internal sealed class BuildPreset : ScriptableObject
     {
         public string presetName;
         public bool isActive = true;
@@ -35,7 +35,7 @@ namespace BuildManager.Scripts
     }
 
     [CustomEditor(typeof(BuildPreset))]
-    public class BuildToolSettingsDrawer : Editor
+    internal sealed class BuildToolSettingsDrawer : Editor
     {
         public override void OnInspectorGUI()
         {
